@@ -58,6 +58,7 @@ balanced Nil = true;;
 balanced (Node(3,Node(5,Nil,Nil),Node(6,Nil,Nil))) = true;;
 balanced (Node(1,Nil,Node(2,Nil,Node(3,Nil,Nil)))) = false;;
 balanced (Node(1,Node(2,Nil,Node(3,Nil,Nil)), Nil)) = false;;
+balanced (Node(1,Node(2,Nil,Node(3,Node(4,Nil,Nil),Nil)), Node(2,Nil,Nil))) = false;;
 
 (* 23 - Programe uma função:
       subtrees: 'a tree -> 'a tree list
