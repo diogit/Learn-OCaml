@@ -140,6 +140,15 @@ let rec pack l =
   | [x] -> [(x, 1)]
   | x::xs -> countEquals x 0 xs
 ;;
+
+let rec pack l =
+  match l with
+  | [] -> []
+  | x::xs -> match pack xs with
+  | [] -> [(x, 1)]
+  | (a, b)::ys -> if x = a then (a, b+1)::ys
+  else (x, 1)::(a, b)::ys
+;;
 pack [] = [];;
 pack [10.1; 10.1; 10.1; 10.1; 10.1; 10.1; 10.1; 10.0; 10.0; 10.1; 10.0] =
 [(10.1, 7); (10.0, 2); (10.1, 1); (10.0,1)];;
@@ -152,6 +161,12 @@ let rec unpack l =
   match l with
   | [] -> []
   | (x, n)::xs -> helpUnpack x n @ unpack xs
+;;
+
+let rec unpack l = 
+  match l with
+  | [] -> []
+  | (a, b)::xs -> if b = 0 then unpack xs else a::unpack((a, b-1)::xs)
 ;;
 unpack [] = [];;
 unpack [(10.1, 7); (10.0, 2); (10.1, 1); (10.0,1)] =
