@@ -1,3 +1,8 @@
+type exp =
+  | EInt of int
+  | EAdd of exp * exp
+  | EMul of exp * exp
+  
 let my_example = EAdd(EMul(EInt 2, EInt 2), EMul(EInt 3, EInt 3)) ;;
 
 let rec eval e =
@@ -18,10 +23,6 @@ let rec expand e =
   match e with
   | EMul(a, EAdd(b, c)) | EMul(EAdd(b, c), a) -> EAdd(EMul(a, b), EMul(a, c))
   | e -> e
-           (*
-             | EInt e -> EInt e
-             | EAdd(e1, e2) -> EAdd(expand e1, expand e2)
-             | EMul(e1, e2) -> EMul(expand e1, expand e2);;*)
 
 let rec simplify e =
   match e with
